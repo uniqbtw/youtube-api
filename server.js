@@ -1,8 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import {
-  getChannelInfoMinimal,
-  getChannelInfoBetter,
   getVideoInfo,
   getChannelInfo,
 } from "./youtube.js";
@@ -10,7 +8,7 @@ import {
 // Load environment variables
 dotenv.config();
 
-const PORT = 3322;
+const PORT = process.env.PORT || 3322;
 const ADDRESS = process.env.ADDRESS || "0.0.0.0";
 const NODE_ENV = process.env.NODE_ENV || "development";
 
@@ -42,68 +40,6 @@ app.get("/youtube/channel/:id", async (req, res) => {
     });
   } catch (err) {
     console.error(`Error fetching channel info for "${channelID}":`, err.message);
-    res.status(500).json({
-      success: false,
-      error: "Failed to fetch channel info. Please check the channel ID and try again.",
-    });
-  }
-});
-
-/**
- * Get basic/minimal channel information (fastest endpoint)
- * GET /youtube/channel/basic/:id
- */
-app.get("/youtube/channel/basic/:id", async (req, res) => {
-  const channelID = req.params.id;
-
-  try {
-    const data = await getChannelInfoMinimal(channelID);
-
-    if (!data) {
-      return res.status(404).json({
-        success: false,
-        error: "Channel not found or data unavailable",
-      });
-    }
-
-    res.json({
-      success: true,
-      data: data,
-      timestamp: new Date().toISOString(),
-    });
-  } catch (err) {
-    console.error(`Error fetching basic channel info for "${channelID}":`, err.message);
-    res.status(500).json({
-      success: false,
-      error: "Failed to fetch channel info. Please check the channel ID and try again.",
-    });
-  }
-});
-
-/**
- * Get extended channel information
- * GET /youtube/channel/more/:id
- */
-app.get("/youtube/channel/more/:id", async (req, res) => {
-  const channelID = req.params.id;
-
-  try {
-    const data = await getChannelInfoBetter(channelID);
-
-    if (!data) {
-      return res.status(404).json({
-        success: false,
-        error: "Channel not found or data unavailable",
-      });
-    }
-
-    res.json({
-      success: true,
-      data: data,
-      timestamp: new Date().toISOString(),
-    });
-  } catch (err) {
-    console.error(`Error fetching extended channel info for "${channelID}":`, err.message);
     res.status(500).json({
       success: false,
       error: "Failed to fetch channel info. Please check the channel ID and try again.",
@@ -155,13 +91,11 @@ app.use((req, res) => {
 // ==================== Start Server ====================
 
 app.listen(PORT, ADDRESS, () => {
-//   console.log(`
-// ╔════════════════════════════════════════════════════════════╗
-// ║       YouTube API Server - Production Ready v2.0           ║
-// ╠════════════════════════════════════════════════════════════╣
-// ║  🌐 Server: http://${ADDRESS}:${PORT}${" ".repeat(Math.max(0, 26 - ADDRESS.length - PORT.toString().length))}║
-// ║  🌍 Environment: ${NODE_ENV}${" ".repeat(Math.max(0, 42 - NODE_ENV.length))}║
-// ║  📖 API Docs: http://${ADDRESS}:${PORT}/${" ".repeat(Math.max(0, 22 - ADDRESS.length - PORT.toString().length))}║
-// ╚════════════════════════════════════════════════════════════╝
-//   `);
+  console.log(`
+╔════════════════════════════════════════════════════════════╗
+║                      YouTube API Server                    ║
+╠════════════════════════════════════════════════════════════╣
+║  🌐 Server: http://${ADDRESS}:${PORT}${" ".repeat(Math.max(0, 39 - ADDRESS.length - PORT.toString().length))}║
+╚════════════════════════════════════════════════════════════╝
+  `);
 });

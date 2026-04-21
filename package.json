@@ -1,6 +1,6 @@
 {
   "name": "youtube_api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "YouTube API server",
   "main": "server.js",
   "type": "module",
@@ -26,7 +26,6 @@
     "helmet": "^8.0.0",
     "morgan": "^1.10.0",
     "xml-js": "^1.6.11",
-    "yt2json": "^1.0.2",
-    "ytsr": "^3.8.4"
+    "yt2json": "^1.0.3"
   }
 }
