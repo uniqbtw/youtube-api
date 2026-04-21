@@ -1,0 +1,32 @@
+{
+  "name": "youtube_api",
+  "version": "1.0.0",
+  "description": "YouTube API server",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "youtube",
+    "api",
+    "server"
+  ],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.24.0",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^5.2.1",
+    "express-rate-limit": "^7.4.1",
+    "express-validator": "^7.2.0",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "xml-js": "^1.6.11",
+    "yt2json": "^1.0.2",
+    "ytsr": "^3.8.4"
+  }
+}
